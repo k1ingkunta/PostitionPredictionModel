@@ -30,7 +30,7 @@ X[numeric_columns] = scaler.fit_transform(X[numeric_columns])
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Create a Random Forest Classifier
-clf = RandomForestClassifier(n_estimators=100, random_state=42)
+clf = RandomForestClassifier(n_estimators=100, random_state=24)
 
 # Train the model
 clf.fit(X_train, y_train)
@@ -47,3 +47,18 @@ print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 accuracy = accuracy_score(y_test, y_pred)
 
 print("Accuracy:", accuracy)
+
+
+new_data_path = 'TESTOWNIK.csv'
+new_data = pd.read_csv(new_data_path, delimiter=';')
+
+target_column = 'Pos'
+X_new = new_data.drop(target_column, axis=1)
+
+y_pred_new = clf.predict(X_new)
+
+print("Predictions for the new data:")
+print(y_pred_new)
+print("actuall positions: ")
+print(new_data.head)
+
